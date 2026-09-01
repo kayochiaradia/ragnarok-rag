@@ -2,13 +2,15 @@
 
 ## Objective
 
-Replace the proof-of-concept behavior that returns the closest passage with a deterministic, evidence-gated question-answering system for the current Brazilian Ragnarok Online Renewal ruleset. The runtime remains fully local and uses no LLM or generative API.
+Replace the proof-of-concept behavior that returns the closest passage with a deterministic, evidence-gated question-answering system for the current Portuguese-language Ragnarok Online LATAM Renewal ruleset. The runtime remains fully local and uses no LLM or generative API.
 
 The system must prefer an explicit refusal over an unsupported answer. Every factual answer must be traceable to the exact curated record used to produce it and, through that record, to a public source.
 
 ## Scope
 
-The primary scope is the current bRO Renewal ruleset. Facts that depend on an episode, event, server, date, or economic state must declare that limitation. Pre-Renewal and private-server information is excluded from the primary answer path unless a future caller explicitly selects another ruleset.
+The primary scope is the current official Ragnarok Online LATAM Renewal operation from GNJOY, available in Portuguese to Brazilian players. Its identifier is `ro-latam-renewal`. The discontinued bRO operation is treated as legacy history, not as the current ruleset. Facts that depend on an episode, event, server, date, or economic state must declare that limitation. Pre-Renewal and private-server information is excluded from the primary answer path unless a future caller explicitly selects another ruleset.
+
+The initial verified source baseline is the [official GNJOY LATAM portal](https://www.gnjoylatam.com/pt), the [official class pages](https://ro.gnjoylatam.com/pt/intro/class/thief/guillotinecross?v=true), and the current [bROWiki LATAM](https://browiki.org/). The archived bROWiki may identify historical facts but cannot, by itself, authorize a current LATAM answer.
 
 Official public sources have the highest priority. A recognized community source may fill a gap when official documentation does not cover the fact, provided the record identifies the source type, access date, applicability, and reduced reliability. Conflicting sources do not produce an automatic answer; the conflict is recorded for editorial review.
 
@@ -43,7 +45,8 @@ Each record has the following shape. The values below illustrate the schema and 
   "intent": "class.beginner_suitability",
   "entities": ["class:gatuno"],
   "aliases": ["gatuno", "thief"],
-  "ruleset": "bro-renewal",
+  "ruleset": "ro-latam-renewal",
+  "review_status": "active",
   "validity": {
     "episode": null,
     "valid_from": null,
@@ -171,7 +174,7 @@ During migration, a feature flag may select the legacy engine for comparison, bu
 ## Success criteria
 
 - Runtime answers use no LLM or generative API.
-- The active corpus is scoped to bRO Renewal and every authoritative record resolves to public source metadata.
+- The active corpus is scoped to RO LATAM Renewal and every authoritative record resolves to public source metadata.
 - Unsupported questions abstain instead of returning merely similar passages.
 - “Gatuno é uma boa classe para começar?” never returns the Job 50 answer.
 - Every displayed citation contributed evidence to the displayed answer.
