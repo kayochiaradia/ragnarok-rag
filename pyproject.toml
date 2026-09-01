@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ragnarok-rag"
+version = "1.0.0"
+description = "RAG extrativo e offline de Ragnarok Online com POC para WhatsApp"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26"]
+
+[project.optional-dependencies]
+web = ["fastapi", "httpx", "uvicorn"]
+quality = ["chromadb", "sentence-transformers"]
+dev = ["pytest"]
+
+[project.scripts]
+ragnarok-rag = "ragnarok_rag.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ragnarok_rag*", "whatsapp*"]
+
+[tool.setuptools.package-data]
+whatsapp = ["static/*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+  "ignore:Using `httpx` with `starlette.testclient` is deprecated",
+]
